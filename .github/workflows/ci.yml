@@ -55,7 +55,7 @@ jobs:
         uses: qltysh/qlty-action/coverage@v2
         with:
           oidc: true
-          files: ci/out/coverage.prof
+          files: ci/out/coverage-clover.xml
 
   bench:
     runs-on: ubuntu-latest
