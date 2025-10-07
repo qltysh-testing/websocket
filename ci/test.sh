@@ -37,6 +37,6 @@ go tool cover -html=ci/out/coverage.prof -o=ci/out/coverage.html
 
 # Generate Clover XML format for Qlty coverage tracking
 if [ "${CI-}" ]; then
-  go install github.com/t-yuki/goclover@latest
-  goclover ci/out/coverage.prof > ci/out/coverage-clover.xml
+  go install github.com/codeofthrone/goclover@latest
+  goclover -f ci/out/coverage.prof -o ci/out/coverage-clover.xml
 fi
