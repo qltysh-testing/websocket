@@ -56,6 +56,7 @@ jobs:
         with:
           oidc: true
           files: ci/out/coverage-clover.xml
+          strip-prefix: github.com/coder/websocket/
 
   bench:
     runs-on: ubuntu-latest
