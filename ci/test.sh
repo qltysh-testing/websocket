@@ -34,3 +34,9 @@ sed -i.bak '/examples/d' ci/out/coverage.prof
 go tool cover -func ci/out/coverage.prof | tail -n1
 
 go tool cover -html=ci/out/coverage.prof -o=ci/out/coverage.html
+
+# Generate Clover XML format for Qlty coverage tracking
+if [ "${CI-}" ]; then
+  go install github.com/codeofthrone/goclover@latest
+  goclover -f ci/out/coverage.prof -o ci/out/coverage-clover.xml
+fi

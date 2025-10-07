@@ -32,6 +32,9 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Disable AppArmor
         if: runner.os == 'Linux'
@@ -48,6 +51,12 @@ jobs:
         with:
           name: coverage.html
           path: ./ci/out/coverage.html
+      - name: Upload coverage to Qlty
+        uses: qltysh/qlty-action/coverage@v2
+        with:
+          oidc: true
+          files: ci/out/coverage-clover.xml
+          strip-prefix: github.com/coder/websocket/
 
   bench:
     runs-on: ubuntu-latest
