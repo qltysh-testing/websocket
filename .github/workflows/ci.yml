@@ -52,9 +52,10 @@ jobs:
           name: coverage.html
           path: ./ci/out/coverage.html
       - name: Upload coverage to Qlty
-        uses: qltysh/qlty-coverage-action@v0
+        uses: qltysh/qlty-action/coverage@v2
         with:
-          file: ci/out/coverage.prof
+          oidc: true
+          files: ci/out/coverage.prof
 
   bench:
     runs-on: ubuntu-latest
