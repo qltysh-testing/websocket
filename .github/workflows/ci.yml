@@ -48,6 +48,17 @@ jobs:
         with:
           name: coverage.html
           path: ./ci/out/coverage.html
+      - name: Name the coverage profile so Qlty detects the Go format
+        run: cp ./ci/out/coverage.prof ./ci/out/coverage.out
+      - name: Upload coverage to Qlty
+        # Secrets are unavailable to pull requests from forks.
+        if: ${{ !github.event.pull_request.head.repo.fork }}
+        uses: qltysh/qlty-action/coverage@v2
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: ./ci/out/coverage.out
+          # Go coverage profiles record import paths, not repository paths.
+          strip-prefix: github.com/coder/websocket
 
   bench:
     runs-on: ubuntu-latest
